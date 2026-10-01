@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Fikih Kelas I - Rukun Islam | Kanwil Kemenag Gorontalo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'islamic-green': '#0D7A5F',
+                        'islamic-dark': '#064E3B',
+                        'islamic-light': '#E6F4F0',
+                        'gold-accent': '#D97706',
+                        'gold-light': '#FEF3C7',
+                        'lake-blue': '#0284C7',
+                        'lake-soft': '#E0F2FE'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Comic Sans MS', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* CSS Offline Fallbacks & Custom Visual Touch */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        @keyframes pulse-subtle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.92; transform: scale(1.02); }
+        }
+        @keyframes wave {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-25px); }
+            100% { transform: translateX(0); }
+        }
+
+        .animate-float { animation: float 3s ease-in-out infinite; }
+        .animate-pulse-subtle { animation: pulse-subtle 2s ease-in-out infinite; }
+        .animate-wave { animation: wave 6s ease-in-out infinite; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            border: 2px solid #E2E8F0;
+        }
+
+        .gold-border {
+            border: 3px solid #F59E0B;
+        }
+
+        .tab-btn.active {
+            background-color: #0D7A5F;
+            color: #FFFFFF;
+            border-color: #0D7A5F;
+            box-shadow: 0 4px 6px -1px rgba(13, 122, 95, 0.4);
+        }
+
+        /* Responsive Canvas Confetti Overlay */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        /* Touch Friendly Drag & Drop Hover States */
+        .drop-zone.drag-over {
+            border-color: #D97706 !important;
+            background-color: #FEF3C7 !important;
+            transform: scale(1.02);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #E6F4F0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #0D7A5F;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col justify-between selection:bg-emerald-200">
+
+    <!-- Canvas Confetti Overlay for Celebrations -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Top Header & Banner -->
+    <header class="bg-gradient-to-r from-emerald-800 via-islamic-green to-teal-700 text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center space-x-3">
+                <!-- SVG Icon Logo Kemenag / Islamic Symbol -->
+                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center border border-yellow-400/50 shadow-inner">
+                    <svg class="w-7 h-7 text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </div>
+                <div>
+                    <span class="text-xs font-semibold bg-yellow-400 text-emerald-950 px-2 py-0.5 rounded-full uppercase tracking-wider">MI FASE A (KELAS 1)</span>
+                    <h1 class="text-lg md:text-xl font-bold tracking-wide">Fikih Interaktif: 5 Rukun Islam</h1>
+                    <p class="text-xs text-emerald-100 flex items-center gap-1">
+                        <span>📍 Kanwil Kemenag Prov. Gorontalo</span>
+                        <span class="opacity-60">•</span>
+                        <span>Kontextual Pesisir Danau Limboto</span>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Audio & Sound Effect Toggle -->
+            <button id="sound-toggle" onclick="toggleSound()" class="bg-white/10 hover:bg-white/20 active:scale-95 transition text-white px-3 py-2 rounded-xl flex items-center gap-2 text-xs md:text-sm font-medium border border-white/20">
+                <span id="sound-icon">🔊</span>
+                <span id="sound-text">Suara: On</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Contextual Decorative Banner (Danau Limboto Backdrop Vibe) -->
+    <div class="bg-gradient-to-b from-teal-700 via-lake-blue to-emerald-900 text-white pt-6 pb-12 px-4 relative overflow-hidden">
+        <div class="max-w-5xl mx-auto text-center relative z-10">
+            <div class="inline-block bg-emerald-950/40 backdrop-blur-sm px-4 py-1.5 rounded-full border border-yellow-300/30 text-yellow-300 text-xs md:text-sm font-medium mb-3 animate-float">
+                ✨ Mari Menjadi Anak Sholeh & Sholehah Dicintai Allah & Rasul ✨
+            </div>
+            <h2 class="text-2xl md:text-4xl font-extrabold mb-2 tracking-tight drop-shadow-md">
+                Belajar & Menghafal Rukun Islam
+            </h2>
+            <p class="text-sm md:text-base text-teal-100 max-w-2xl mx-auto leading-relaxed">
+                "Seperti kokohnya tiang di tepi Danau Limboto, Rukun Islam adalah lima tiang utama fondasi agama kita!"
+            </p>
+        </div>
+
+        <!-- Wave SVG visual bottom -->
+        <div class="absolute bottom-0 left-0 right-0 overflow-hidden leading-none z-0 opacity-40">
+            <svg class="relative block w-full h-10 text-slate-50 animate-wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,121.3,200,115.8,241.09,112.5,281.3,88.1,321.39,56.44Z" fill="currentColor"></path>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="max-w-5xl mx-auto px-4 -mt-6 relative z-20">
+        <div class="bg-white rounded-2xl p-2 shadow-xl border border-slate-200 grid grid-cols-2 md:grid-cols-4 gap-2">
+            <button onclick="switchTab('modul-materi')" id="btn-modul-materi" class="tab-btn active py-3 px-3 rounded-xl text-center text-xs md:text-sm font-bold transition duration-200 flex flex-col items-center justify-center gap-1">
+                <span class="text-lg">📖</span>
+                <span>1. Eksplorasi Rukun</span>
+            </button>
+            <button onclick="switchTab('modul-game')" id="btn-modul-game" class="tab-btn bg-slate-100 text-slate-600 hover:bg-slate-200 py-3 px-3 rounded-xl text-center text-xs md:text-sm font-bold transition duration-200 flex flex-col items-center justify-center gap-1">
+                <span class="text-lg">🧩</span>
+                <span>2. Susun Urutan</span>
+            </button>
+            <button onclick="switchTab('modul-kuis')" id="btn-modul-kuis" class="tab-btn bg-slate-100 text-slate-600 hover:bg-slate-200 py-3 px-3 rounded-xl text-center text-xs md:text-sm font-bold transition duration-200 flex flex-col items-center justify-center gap-1">
+                <span class="text-lg">🎯</span>
+                <span>3. Kuis Formatif</span>
+            </button>
+            <button onclick="switchTab('modul-rangkuman')" id="btn-modul-rangkuman" class="tab-btn bg-slate-100 text-slate-600 hover:bg-slate-200 py-3 px-3 rounded-xl text-center text-xs md:text-sm font-bold transition duration-200 flex flex-col items-center justify-center gap-1">
+                <span class="text-lg">🏆</span>
+                <span>4. Sertifikat & Skor</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Dynamic Content Area -->
+    <main class="max-w-5xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- MODULE 1: EKSPLORASI MATERI MODULAR -->
+        <section id="modul-materi" class="tab-content space-y-6">
+            <div class="bg-emerald-50 border-l-4 border-islamic-green p-4 rounded-r-2xl shadow-sm flex items-start gap-3">
+                <span class="text-2xl">💡</span>
+                <div>
+                    <h3 class="font-bold text-islamic-dark text-base md:text-lg">Petunjuk Guru & Murid:</h3>
+                    <p class="text-xs md:text-sm text-slate-700">
+                        Klik atau sentuh setiap <strong>Kartu Rukun Islam</strong> di bawah ini untuk mendengarkan lafal, melihat penjelasan gambar, dan memahami artinya satu per satu!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Grid 5 Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Card 1 -->
+                <div onclick="openModalMateri(0)" class="glass-card rounded-2xl p-5 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer border-t-4 border-emerald-500 relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-emerald-100 rounded-full opacity-50 group-hover:scale-125 transition"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-10 h-10 rounded-full bg-emerald-600 text-white font-extrabold flex items-center justify-center text-lg shadow">1</span>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-800 rounded-full">Fondasi Pertama</span>
+                    </div>
+                    <div class="text-center my-3">
+                        <div class="text-4xl mb-2 group-hover:scale-110 transition">☝️</div>
+                        <h4 class="text-xl font-bold text-islamic-dark">Mengucapkan Syahadat</h4>
+                        <p class="text-xs text-slate-500 mt-1">Saksi bahwa tiada Tuhan selain Allah & Nabi Muhammad utusan Allah</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-emerald-700 font-bold">
+                        <span>Klik untuk pelajari ➔</span>
+                        <span>🔊 Dengarkan</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div onclick="openModalMateri(1)" class="glass-card rounded-2xl p-5 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer border-t-4 border-amber-500 relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-100 rounded-full opacity-50 group-hover:scale-125 transition"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-10 h-10 rounded-full bg-amber-500 text-white font-extrabold flex items-center justify-center text-lg shadow">2</span>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-amber-100 text-amber-800 rounded-full">Tiang Agama</span>
+                    </div>
+                    <div class="text-center my-3">
+                        <div class="text-4xl mb-2 group-hover:scale-110 transition">🕌</div>
+                        <h4 class="text-xl font-bold text-islamic-dark">Mendirikan Shalat</h4>
+                        <p class="text-xs text-slate-500 mt-1">Melaksanakan shalat wajib 5 waktu sehari semalam</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-amber-700 font-bold">
+                        <span>Klik untuk pelajari ➔</span>
+                        <span>🔊 Dengarkan</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div onclick="openModalMateri(2)" class="glass-card rounded-2xl p-5 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer border-t-4 border-teal-500 relative overflow-hidden group">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-teal-100 rounded-full opacity-50 group-hover:scale-125 transition"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-10 h-10 rounded-full bg-teal-600 text-white font-extrabold flex items-center justify-center text-lg shadow">3</span>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-teal-100 text-teal-800 rounded-full">Berbagi Kasih</span>
+                    </div>
+                    <div class="text-center my-3">
+                        <div class="text-4xl mb-2 group-hover:scale-110 transition">🤝</div>
+                        <h4 class="text-xl font-bold text-islamic-dark">Membayar Zakat</h4>
+                        <p class="text-xs text-slate-500 mt-1">Membersihkan harta & membantu fakir miskin di sekitar kita</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-teal-700 font-bold">
+                        <span>Klik untuk pelajari ➔</span>
+                        <span>🔊 Dengarkan</span>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div onclick="openModalMateri(3)" class="glass-card rounded-2xl p-5 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer border-t-4 border-indigo-500 relative overflow-hidden group md:col-span-1 md:col-start-1">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-indigo-100 rounded-full opacity-50 group-hover:scale-125 transition"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-10 h-10 rounded-full bg-indigo-600 text-white font-extrabold flex items-center justify-center text-lg shadow">4</span>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-indigo-100 text-indigo-800 rounded-full">Bulan Ramadan</span>
+                    </div>
+                    <div class="text-center my-3">
+                        <div class="text-4xl mb-2 group-hover:scale-110 transition">🌙</div>
+                        <h4 class="text-xl font-bold text-islamic-dark">Berpuasa Ramadan</h4>
+                        <p class="text-xs text-slate-500 mt-1">Menahan lapar, dahaga, dan melatih kesabaran dari terbit fajar</p>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-indigo-700 font-bold">
+                        <span>Klik untuk pelajari ➔</span>
+                        <span>🔊 Dengarkan</span>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div onclick="openModalMateri(4)" class="glass-card rounded-2xl p-5 hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer border-t-4 border-yellow-500 relative overflow-hidden group md:col-span-2">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-yellow-100 rounded-full opacity-50 group-hover:scale-125 transition"></div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="w-10 h-10 rounded-full bg-yellow-600 text-white font-extrabold flex items-center justify-center text-lg shadow">5</span>
+                        <span class="text-xs font-semibold px-2.5 py-1 bg-yellow-100 text-yellow-800 rounded-full">Bagi Yang Mampu</span>
+                    </div>
+                    <div class="text-center my-3 flex flex-col md:flex-row items-center justify-center gap-4">
+                        <div class="text-5xl group-hover:scale-110 transition">🕋</div>
+                        <div class="text-left">
+                            <h4 class="text-xl font-bold text-islamic-dark">Menunaikan Ibadah Haji</h4>
+                            <p class="text-xs text-slate-500 mt-1">Berziarah ke Baitullah di Makkah Al-Mukarramah bagi murid yang telah mampu kelak</p>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between text-xs text-yellow-700 font-bold">
+                        <span>Klik untuk pelajari detail lengkap ➔</span>
+                        <span>🔊 Dengarkan</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal Detail Materi -->
+        <div id="modal-materi" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
+            <div class="bg-white rounded-3xl max-w-lg w-full p-6 shadow-2xl border-4 border-yellow-400 relative animate-float">
+                <button onclick="closeModalMateri()" class="absolute top-4 right-4 bg-slate-100 hover:bg-slate-200 text-slate-700 w-9 h-9 rounded-full flex items-center justify-center font-extrabold text-lg">✕</button>
+                
+                <div class="text-center">
+                    <span id="modal-number" class="inline-block px-3 py-1 bg-islamic-green text-white text-xs font-bold rounded-full mb-2"></span>
+                    <div id="modal-icon" class="text-6xl my-2"></div>
+                    <h3 id="modal-title" class="text-2xl font-black text-islamic-dark mb-1"></h3>
+                    <p id="modal-arabic" class="text-xl font-serif text-amber-700 font-bold my-2" dir="rtl"></p>
+                    <p id="modal-desc" class="text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200 my-4 text-left"></p>
+                    
+                    <div class="bg-yellow-50 border border-yellow-200 p-3 rounded-xl text-xs text-amber-900 font-medium text-left flex items-center gap-2 mb-4">
+                        <span>🌊</span>
+                        <span id="modal-context"></span>
+                    </div>
+
+                    <button onclick="playModalAudio()" class="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold py-3 rounded-xl shadow-lg flex items-center justify-center gap-2 text-sm">
+                        <span>🔊</span> Dengarkan Penjelasan Suara
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: PERMAINAN URUTKAN RUKUN ISLAM -->
+        <section id="modul-game" class="tab-content hidden space-y-6">
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 rounded-r-2xl shadow-sm flex items-start gap-3">
+                <span class="text-2xl">🎮</span>
+                <div>
+                    <h3 class="font-bold text-amber-900 text-base md:text-lg">Tantangan Susun Urutan:</h3>
+                    <p class="text-xs md:text-sm text-amber-800">
+                        Klik / Sentuh tombol pilihan rukun di sebelah kiri, lalu letakkan pada nomor kotak yang benar di sebelah kanan secara berurutan dari 1 sampai 5!
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Choice Pool -->
+                <div class="bg-white p-5 rounded-2xl shadow-md border border-slate-200">
+                    <h4 class="font-bold text-slate-700 text-sm mb-3 flex items-center gap-2">
+                        <span>📌</span> Pilihan Rukun Islam (Acak):
+                    </h4>
+                    <div id="game-pool" class="space-y-3 min-h-[300px] flex flex-col justify-center">
+                        <!-- Items rendered via JS -->
+                    </div>
+                </div>
+
+                <!-- Drop Targets -->
+                <div class="bg-slate-100 p-5 rounded-2xl shadow-inner border border-slate-300">
+                    <h4 class="font-bold text-slate-700 text-sm mb-3 flex items-center gap-2">
+                        <span>🎯</span> Kotak Urutan Yang Benar (1 - 5):
+                    </h4>
+                    <div id="game-targets" class="space-y-3">
+                        <!-- Targets rendered via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Realtime Feedback Box for Game -->
+            <div id="game-feedback" class="hidden p-4 rounded-2xl text-center font-bold text-sm shadow-md transition"></div>
+
+            <div class="flex justify-center gap-4 pt-2">
+                <button onclick="resetGame()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold px-6 py-3 rounded-xl text-sm transition flex items-center gap-2">
+                    <span>🔄</span> Ulangi Permainan
+                </button>
+                <button onclick="checkGameResult()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold px-8 py-3 rounded-xl text-sm shadow-lg hover:shadow-xl transition transform active:scale-95 flex items-center gap-2">
+                    <span>✨</span> Periksa Jawaban Saya
+                </button>
+            </div>
+        </section>
+
+        <!-- MODULE 3: KUIS EVALUASI FORMATIF INTERAKTIF -->
+        <section id="modul-kuis" class="tab-content hidden space-y-6">
+            <!-- Quiz Card Wrapper -->
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-slate-200 relative">
+                
+                <!-- Progress Header -->
+                <div class="flex items-center justify-between mb-6 pb-4 border-b border-slate-100">
+                    <div>
+                        <span id="quiz-progress-text" class="text-xs font-bold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full">
+                            Soal 1 dari 5
+                        </span>
+                        <h3 class="text-lg md:text-xl font-bold text-slate-800 mt-2">Kuis Cerdas Rukun Islam</h3>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-xs text-slate-400 block">Skor Sementara</span>
+                        <span id="quiz-live-score" class="text-2xl font-black text-amber-500">0</span>
+                    </div>
+                </div>
+
+                <!-- Question Text -->
+                <div class="min-h-[90px] flex items-center mb-6">
+                    <p id="quiz-question-text" class="text-base md:text-lg font-bold text-slate-800 leading-relaxed"></p>
+                </div>
+
+                <!-- Options -->
+                <div id="quiz-options-container" class="grid grid-cols-1 gap-3 mb-6">
+                    <!-- Option buttons populated by JS -->
+                </div>
+
+                <!-- Educational Realtime Explanation Dialog Box -->
+                <div id="quiz-feedback-box" class="hidden p-4 rounded-2xl mb-6 border text-sm leading-relaxed animate-pulse-subtle">
+                    <div class="flex items-start gap-3">
+                        <span id="quiz-feedback-icon" class="text-2xl"></span>
+                        <div>
+                            <h5 id="quiz-feedback-title" class="font-bold mb-1"></h5>
+                            <p id="quiz-feedback-desc" class="text-xs md:text-sm"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer Nav -->
+                <div class="flex justify-between items-center pt-4 border-t border-slate-100">
+                    <button id="quiz-prev-btn" onclick="prevQuestion()" class="text-slate-400 font-bold text-xs md:text-sm px-4 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 disabled:opacity-40">
+                        ⬅️ Soal Sebelumnya
+                    </button>
+                    <button id="quiz-next-btn" onclick="nextQuestion()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs md:text-sm px-6 py-2.5 rounded-xl shadow transition">
+                        Lanjut ➡️
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODULE 4: RANGKUMAN & SERTIFIKAT PRESTASI -->
+        <section id="modul-rangkuman" class="tab-content hidden space-y-6">
+            <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border-4 border-yellow-400 text-center relative overflow-hidden">
+                <!-- Background Decorative Seal -->
+                <div class="absolute -right-12 -top-12 w-40 h-40 bg-yellow-100 rounded-full opacity-40"></div>
+                
+                <div class="w-20 h-20 bg-yellow-400 rounded-full flex items-center justify-center mx-auto mb-4 text-4xl shadow-lg border-4 border-white animate-float">
+                    🎖️
+                </div>
+
+                <h3 class="text-2xl md:text-3xl font-black text-slate-800 mb-1">Sertifikat Capaian Belajar</h3>
+                <p class="text-xs md:text-sm text-slate-500 mb-6">Pembelajaran Fikih Rukun Islam - Madrasah Ibtidaiyah Kelas I</p>
+
+                <!-- Score Badge Card -->
+                <div class="max-w-md mx-auto bg-gradient-to-br from-emerald-50 to-teal-50 p-6 rounded-2xl border border-emerald-200 my-4 shadow-inner">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="border-r border-emerald-200 pr-2">
+                            <span class="text-xs text-slate-500 font-semibold block">Skor Kuis Anda</span>
+                            <span id="summary-quiz-score" class="text-4xl font-black text-emerald-700">0</span>
+                            <span class="text-xs text-slate-400">/ 100 Poin</span>
+                        </div>
+                        <div class="pl-2">
+                            <span class="text-xs text-slate-500 font-semibold block">Status Urutan Rukun</span>
+                            <span id="summary-game-status" class="text-lg font-bold text-amber-600 block mt-2">Belum Selesai</span>
+                        </div>
+                    </div>
+
+                    <div id="summary-stars" class="flex justify-center gap-2 text-3xl my-3">
+                        <span>⭐</span><span>⭐</span><span>⭐</span>
+                    </div>
+
+                    <p id="summary-appreciation" class="text-xs font-medium text-emerald-900 bg-white p-3 rounded-xl border border-emerald-100">
+                        Ayo selesaikan modul eksplorasi dan kuis untuk meraih 3 Bintang Emas Utama!
+                    </p>
+                </div>
+
+                <!-- Printable Summary Table -->
+                <div class="text-left max-w-lg mx-auto bg-slate-50 p-4 rounded-xl text-xs space-y-2 border border-slate-200 my-4">
+                    <h4 class="font-bold text-slate-700 border-b pb-1">📜 Ringkasan 5 Rukun Islam Kunci:</h4>
+                    <ol class="list-decimal list-inside space-y-1 text-slate-600 font-medium">
+                        <li><strong>Syahadat:</strong> Bersaksi tiada Tuhan selain Allah & Nabi Muhammad Utusan Allah.</li>
+                        <li><strong>Shalat:</strong> Wajib 5 waktu (Subuh, Dzuhur, Ashar, Maghrib, Isya).</li>
+                        <li><strong>Zakat:</strong> Membantu fakir miskin dan membersihkan harta.</li>
+                        <li><strong>Puasa:</strong> Menahan lapar & dahaga di bulan Ramadan.</li>
+                        <li><strong>Haji:</strong> Menunaikan ibadah ke Baitullah jika mampu.</li>
+                    </ol>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-wrap justify-center gap-3 pt-4">
+                    <button onclick="window.print()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold px-5 py-2.5 rounded-xl text-xs md:text-sm shadow flex items-center gap-2">
+                        <span>🖨️</span> Cetak / Simpan Sertifikat
+                    </button>
+                    <button onclick="resetAllProgress()" class="bg-rose-500 hover:bg-rose-600 text-white font-bold px-5 py-2.5 rounded-xl text-xs md:text-sm shadow flex items-center gap-2">
+                        <span>🔄</span> Mula Sesi Baru
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-6 mt-12 border-t border-slate-800">
+        <div class="max-w-5xl mx-auto px-4 text-center space-y-2">
+            <p class="font-semibold text-slate-300">
+                Media Pembelajaran Interaktif (MPI) Fikih - Fase A / Kelas 1 MI
+            </p>
+            <p>
+                Dikembangkan untuk Guru Madrasah di Lingkungan Kantor Wilayah Kementerian Agama Provinsi Gorontalo
+            </p>
+            <p class="text-slate-500 text-[10px]">
+                Moda Akses 100% Offline Mandiri (Single File HTML5 + JS + Web Audio API) • Tema Pesisir Danau Limboto
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        /* Web Audio API Synthesizer (Zero External Dependencies, Offline Sound Effects) */
+        let audioCtx = null;
+        let soundEnabled = true;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (AudioContext) {
+                    audioCtx = new AudioContext();
+                }
+            }
+            if (audioCtx && audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-text').innerText = soundEnabled ? "Suara: On" : "Suara: Off";
+            document.getElementById('sound-icon').innerText = soundEnabled ? "🔊" : "🔇";
+            if (soundEnabled) playSoundEffect('click');
+        }
+
+        function playSoundEffect(type) {
+            if (!soundEnabled) return;
+            initAudio();
+            if (!audioCtx) return;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, now);
+                osc.frequency.exponentialRampToValueAtTime(300, now + 0.08);
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } else if (type === 'correct') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.setValueAtTime(659.25, now + 0.1); // E5
+                osc.frequency.setValueAtTime(783.99, now + 0.2); // G5
+                gain.gain.setValueAtTime(0.3, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } else if (type === 'wrong') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, now);
+                osc.frequency.setValueAtTime(180, now + 0.15);
+                gain.gain.setValueAtTime(0.25, now);
+                gain.gain.linearRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } else if (type === 'fanfare') {
+                const notes = [261.63, 329.63, 392.00, 523.25];
+                notes.forEach((freq, idx) => {
+                    const subOsc = audioCtx.createOscillator();
+                    const subGain = audioCtx.createGain();
+                    subOsc.connect(subGain);
+                    subGain.connect(audioCtx.destination);
+                    subOsc.frequency.setValueAtTime(freq, now + idx * 0.12);
+                    subGain.gain.setValueAtTime(0.2, now + idx * 0.12);
+                    subGain.gain.linearRampToValueAtTime(0.01, now + idx * 0.12 + 0.25);
+                    subOsc.start(now + idx * 0.12);
+                    subOsc.stop(now + idx * 0.12 + 0.25);
+                });
+            }
+        }
+
+        // Data 5 Rukun Islam
+        const rukunData = [
+            {
+                number: 1,
+                title: "Syahadat",
+                arabic: "أَشْهَدُ أَنْ لَا إِلٰهَ إِلَّا اللهُ وَأَشْهَدُ أَنَّ مُحَمَّدًا رَسُوْلُ اللهِ",
+                icon: "☝️",
+                desc: "Mengucapkan Dua Kalimat Syahadat adalah rukun Islam yang pertama. Syahadat artinya bersaksi bahwa tidak ada Tuhan yang berhak disembah selain Allah SWT, dan Nabi Muhammad SAW adalah utusan Allah.",
+                context: "Sejak kecil di pesisir Danau Limboto, kita selalu mengawali hari dengan bersyahadat dan berdoa."
+            },
+            {
+                number: 2,
+                title: "Shalat 5 Waktu",
+                arabic: "إِقَامُ الصَّلَاةِ",
+                icon: "🕌",
+                desc: "Mendirikan shalat 5 waktu sehari semalam (Subuh, Dzuhur, Ashar, Maghrib, Isya). Shalat adalah tiang agama Islam agar hati kita selalu dekat dan dilindungi oleh Allah SWT.",
+                context: "Ketika suara azan berkumandang dari masjid di tepi danau, kita bergegas mengambil wudhu."
+            },
+            {
+                number: 3,
+                title: "Membayar Zakat",
+                arabic: "إِيْتَاءِ الزَّكَاةِ",
+                icon: "🤝",
+                desc: "Membayar zakat artinya mengeluarkan sebagian harta yang kita miliki untuk diberikan kepada yang membutuhkan (seperti fakir miskin) agar harta kita bersih dan berkah.",
+                context: "Saling berbagi rezeki ikan atau hasil panen bersama tetangga adalah wujud kebaikan zakat dan sedekah."
+            },
+            {
+                number: 4,
+                title: "Berpuasa di Bulan Ramadan",
+                arabic: "صَوْمُ رَمَضَانَ",
+                icon: "🌙",
+                desc: "Berpuasa dilakukan pada bulan suci Ramadan. Kita menahan diri dari makan, minum, serta nafsu sejak terbit fajar (Subuh) hingga terbenam matahari (Maghrib).",
+                context: "Suasana berbuka puasa bersama keluarga di tepi pantai danau membawa kehangatan dan kebahagiaan."
+            },
+            {
+                number: 5,
+                title: "Menunaikan Ibadah Haji",
+                arabic: "حَجُّ الْبَيْتِ لِمَنِ اسْتَطَاعَ إِلَيْهِ سَبِيْلًا",
+                icon: "🕋",
+                desc: "Menunaikan ibadah haji ke Baitullah di Kota Makkah Al-Mukarramah. Rukun ini wajib dilaksanakan bagi umat Islam yang sudah mampu secara fisik, kesehatan, dan keuangan.",
+                context: "Kita mendoakan orang tua dan sanak saudara di Gorontalo agar dapat menunaikan ibadah haji ke tanah suci Makkah."
+            }
+        ];
+
+        // State Tab Switching
+        function switchTab(tabId) {
+            playSoundEffect('click');
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active', 'bg-islamic-green', 'text-white'));
+            
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+            }
+
+            if (tabId === 'modul-game') renderGame();
+            if (tabId === 'modul-kuis') renderQuizQuestion();
+            if (tabId === 'modul-rangkuman') updateSummary();
+        }
+
+        // Modal Materi Logic
+        let currentModalIdx = 0;
+        function openModalMateri(idx) {
+            currentModalIdx = idx;
+            const data = rukunData[idx];
+            document.getElementById('modal-number').innerText = `RUKUN ISLAM KE-${data.number}`;
+            document.getElementById('modal-icon').innerText = data.icon;
+            document.getElementById('modal-title').innerText = data.title;
+            document.getElementById('modal-arabic').innerText = data.arabic;
+            document.getElementById('modal-desc').innerText = data.desc;
+            document.getElementById('modal-context').innerText = data.context;
+
+            document.getElementById('modal-materi').classList.remove('hidden');
+            playSoundEffect('click');
+        }
+
+        function closeModalMateri() {
+            playSoundEffect('click');
+            document.getElementById('modal-materi').classList.add('hidden');
+        }
+
+        function playModalAudio() {
+            playSoundEffect('fanfare');
+            // Text to speech browser API if available
+            if ('speechSynthesis' in window) {
+                const data = rukunData[currentModalIdx];
+                const utterance = new SpeechSynthesisUtterance(`Rukun Islam ke ${data.number}. ${data.title}. ${data.desc}`);
+                utterance.lang = 'id-ID';
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Game Logic (Ordering Rukun Islam)
+        let selectedSourceIndex = null;
+        let userGameAnswers = [null, null, null, null, null];
+        let gameShuffledPool = [];
+
+        function renderGame() {
+            if (gameShuffledPool.length === 0) {
+                gameShuffledPool = [...rukunData].sort(() => Math.random() - 0.5);
+            }
+
+            const poolContainer = document.getElementById('game-pool');
+            const targetContainer = document.getElementById('game-targets');
+
+            poolContainer.innerHTML = '';
+            targetContainer.innerHTML = '';
+
+            // Render Pool Buttons
+            gameShuffledPool.forEach((item, pIdx) => {
+                const isUsed = userGameAnswers.includes(item.number);
+                const btn = document.createElement('button');
+                btn.className = `w-full p-3 rounded-xl font-bold text-xs md:text-sm text-left flex items-center justify-between transition border ${
+                    isUsed 
+                        ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed opacity-50' 
+                        : selectedSourceIndex === pIdx 
+                            ? 'bg-amber-100 border-amber-500 text-amber-900 shadow-md ring-2 ring-amber-400' 
+                            : 'bg-white hover:bg-emerald-50 border-slate-200 text-slate-800 shadow-sm'
+                }`;
+                btn.disabled = isUsed;
+                btn.innerHTML = `
+                    <span class="flex items-center gap-2">
+                        <span class="text-xl">${item.icon}</span>
+                        <span>${item.title}</span>
+                    </span>
+                    <span class="text-xs bg-slate-100 px-2 py-0.5 rounded text-slate-500 font-normal">Pilih</span>
+                `;
+                btn.onclick = () => {
+                    playSoundEffect('click');
+                    selectedSourceIndex = pIdx;
+                    renderGame();
+                };
+                poolContainer.appendChild(btn);
+            });
+
+            // Render 5 Drop Target Slot
+            for (let i = 0; i < 5; i++) {
+                const currentAnswerNumber = userGameAnswers[i];
+                const targetObj = rukunData.find(r => r.number === currentAnswerNumber);
+
+                const slot = document.createElement('div');
+                slot.className = `p-3 rounded-xl border-2 border-dashed flex items-center justify-between min-h-[58px] transition ${
+                    targetObj 
+                        ? 'bg-emerald-50 border-emerald-400 text-emerald-900' 
+                        : 'bg-white border-slate-300 text-slate-400'
+                }`;
+
+                slot.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-full bg-islamic-green text-white font-black flex items-center justify-center text-xs shadow">
+                            ${i + 1}
+                        </span>
+                        ${targetObj 
+                            ? `<span class="font-bold text-xs md:text-sm text-slate-800 flex items-center gap-2">
+                                <span class="text-xl">${targetObj.icon}</span> ${targetObj.title}
+                               </span>`
+                            : `<span class="text-xs italic text-slate-400">Sentuh slot ini untuk memasukkan pilihan...</span>`
+                        }
+                    </div>
+                    ${targetObj 
+                        ? `<button onclick="removeGameSlot(${i})" class="text-xs bg-rose-100 hover:bg-rose-200 text-rose-700 px-2.5 py-1 rounded-lg font-bold">Batal</button>`
+                        : `<button onclick="assignToSlot(${i})" class="text-xs bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1 rounded-lg font-bold shadow">Isi Di Sini</button>`
+                    }
+                `;
+                targetContainer.appendChild(slot);
+            }
+        }
+
+        function assignToSlot(slotIdx) {
+            if (selectedSourceIndex === null) {
+                const fb = document.getElementById('game-feedback');
+                fb.className = "p-4 rounded-2xl text-center font-bold text-xs bg-amber-100 text-amber-800 border border-amber-300 block";
+                fb.innerText = "⚠️ Pilih dulu salah satu nama Rukun Islam di sebelah kiri!";
+                playSoundEffect('wrong');
+                return;
+            }
+            playSoundEffect('click');
+            const item = gameShuffledPool[selectedSourceIndex];
+            userGameAnswers[slotIdx] = item.number;
+            selectedSourceIndex = null;
+            document.getElementById('game-feedback').className = "hidden";
+            renderGame();
+        }
+
+        function removeGameSlot(slotIdx) {
+            playSoundEffect('click');
+            userGameAnswers[slotIdx] = null;
+            document.getElementById('game-feedback').className = "hidden";
+            renderGame();
+        }
+
+        function resetGame() {
+            playSoundEffect('click');
+            userGameAnswers = [null, null, null, null, null];
+            selectedSourceIndex = null;
+            gameShuffledPool = [...rukunData].sort(() => Math.random() - 0.5);
+            document.getElementById('game-feedback').className = "hidden";
+            renderGame();
+        }
+
+        function checkGameResult() {
+            const fb = document.getElementById('game-feedback');
+            fb.classList.remove('hidden');
+
+            if (userGameAnswers.includes(null)) {
+                fb.className = "p-4 rounded-2xl text-center font-bold text-xs md:text-sm bg-amber-100 text-amber-800 border border-amber-300 block";
+                fb.innerText = "⚠️ Semua 5 kotak urutan harus diisi terlebih dahulu ya anak sholeh/sholehah!";
+                playSoundEffect('wrong');
+                return;
+            }
+
+            let correctCount = 0;
+            userGameAnswers.forEach((num, idx) => {
+                if (num === idx + 1) correctCount++;
+            });
+
+            if (correctCount === 5) {
+                fb.className = "p-4 rounded-2xl text-center font-bold text-xs md:text-sm bg-emerald-100 text-emerald-900 border border-emerald-400 block animate-bounce";
+                fb.innerText = "🎉 MASYA ALLAH HEBAT SEKALI! Urutan Rukun Islam kamu 100% BENAR & SEMPURNA! ⭐⭐⭐";
+                playSoundEffect('fanfare');
+                triggerConfetti();
+            } else {
+                fb.className = "p-4 rounded-2xl text-center font-bold text-xs md:text-sm bg-rose-100 text-rose-900 border border-rose-300 block";
+                fb.innerText = `💡 Masih ada yang tertukar. Kamu menjawab ${correctCount} dari 5 urutan dengan benar. Periksa kembali yuk!`;
+                playSoundEffect('wrong');
+            }
+        }
+
+        // Quiz Formative Questions Data
+        const quizData = [
+            {
+                q: "Ada berapa jumlah seluruh Rukun Islam yang wajib kita ketahui?",
+                options: ["3 Rukun", "5 Rukun", "6 Rukun"],
+                answer: 1,
+                explanation: "Benar sekali! Rukun Islam ada 5 perkara: Syahadat, Shalat, Zakat, Puasa, dan Haji."
+            },
+            {
+                q: "Rukun Islam yang pertama dan menjadi syarat utama masuk Islam adalah...",
+                options: ["Mengucapkan Syahadat", "Membayar Zakat", "Mendirikan Shalat"],
+                answer: 0,
+                explanation: "Tepat! Syahadat adalah pengakuan bersaksi tiada Tuhan selain Allah dan Nabi Muhammad utusan Allah."
+            },
+            {
+                q: "Sebagai tiang agama Islam, shalat wajib yang kita laksanakan sehari semalam berjumlah...",
+                options: ["3 Waktu", "5 Waktu", "7 Waktu"],
+                answer: 1,
+                explanation: "Hebat! Shalat wajib ada 5 waktu, yaitu Subuh, Dzuhur, Ashar, Maghrib, dan Isya."
+            },
+            {
+                q: "Menahan lapar, dahaga, dan emosi dari fajar hingga maghrib pada bulan Ramadan disebut...",
+                options: ["Berpuasa", "Membayar Zakat", "Pergi Haji"],
+                answer: 0,
+                explanation: "Masya Allah benar! Berpuasa di bulan Ramadan melatih kita untuk sabar dan bersyukur."
+            },
+            {
+                q: "Menunaikan ibadah haji ke kota Makkah merupakan rukun Islam ke-5 yang diwajibkan bagi...",
+                options: ["Semua anak kecil", "Setiap orang yang sudah mampu", "Hanya para raja"],
+                answer: 1,
+                explanation: "Sempurna! Ibadah haji wajib dilaksanakan bagi umat Islam yang sudah memiliki kemampuan fisik dan biaya."
+            }
+        ];
+
+        let currentQuizIdx = 0;
+        let userQuizAnswers = [null, null, null, null, null];
+
+        function renderQuizQuestion() {
+            const item = quizData[currentQuizIdx];
+            document.getElementById('quiz-progress-text').innerText = `Soal ${currentQuizIdx + 1} dari ${quizData.length}`;
+            document.getElementById('quiz-question-text').innerText = item.q;
+
+            // Live score
+            let calculatedScore = 0;
+            userQuizAnswers.forEach((ans, idx) => {
+                if (ans === quizData[idx].answer) calculatedScore += 20;
+            });
+            document.getElementById('quiz-live-score').innerText = calculatedScore;
+
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = '';
+
+            item.options.forEach((optText, optIdx) => {
+                const isSelected = userQuizAnswers[currentQuizIdx] === optIdx;
+                const btn = document.createElement('button');
+                btn.className = `w-full p-4 rounded-xl font-bold text-xs md:text-sm text-left transition flex items-center justify-between border ${
+                    isSelected 
+                        ? 'bg-emerald-700 text-white border-emerald-800 shadow-md ring-2 ring-emerald-400' 
+                        : 'bg-slate-50 hover:bg-emerald-50 border-slate-200 text-slate-800'
+                }`;
+                btn.innerHTML = `
+                    <span>${optText}</span>
+                    <span class="w-6 h-6 rounded-full border border-slate-300 flex items-center justify-center text-xs font-black ${isSelected ? 'bg-yellow-400 text-emerald-950 border-yellow-400' : ''}">
+                        ${String.fromCharCode(65 + optIdx)}
+                    </span>
+                `;
+                btn.onclick = () => selectQuizAnswer(optIdx);
+                container.appendChild(btn);
+            });
+
+            // Prev & Next Buttons
+            document.getElementById('quiz-prev-btn').disabled = currentQuizIdx === 0;
+            
+            const nextBtn = document.getElementById('quiz-next-btn');
+            if (currentQuizIdx === quizData.length - 1) {
+                nextBtn.innerText = "Lihat Sertifikat & Skor 🏆";
+            } else {
+                nextBtn.innerText = "Lanjut ➡️";
+            }
+
+            // Feedback logic
+            const fbBox = document.getElementById('quiz-feedback-box');
+            if (userQuizAnswers[currentQuizIdx] !== null) {
+                showQuizFeedback(userQuizAnswers[currentQuizIdx]);
+            } else {
+                fbBox.classList.add('hidden');
+            }
+        }
+
+        function selectQuizAnswer(optIdx) {
+            userQuizAnswers[currentQuizIdx] = optIdx;
+            const isCorrect = optIdx === quizData[currentQuizIdx].answer;
+            if (isCorrect) {
+                playSoundEffect('correct');
+            } else {
+                playSoundEffect('wrong');
+            }
+            renderQuizQuestion();
+        }
+
+        function showQuizFeedback(userAns) {
+            const item = quizData[currentQuizIdx];
+            const isCorrect = userAns === item.answer;
+
+            const fbBox = document.getElementById('quiz-feedback-box');
+            const fbIcon = document.getElementById('quiz-feedback-icon');
+            const fbTitle = document.getElementById('quiz-feedback-title');
+            const fbDesc = document.getElementById('quiz-feedback-desc');
+
+            fbBox.classList.remove('hidden');
+            if (isCorrect) {
+                fbBox.className = "p-4 rounded-2xl mb-6 border text-sm leading-relaxed bg-emerald-50 border-emerald-300 text-emerald-900";
+                fbIcon.innerText = "✅";
+                fbTitle.innerText = "Jawaban Kamu Tepat!";
+            } else {
+                fbBox.className = "p-4 rounded-2xl mb-6 border text-sm leading-relaxed bg-amber-50 border-amber-300 text-amber-900";
+                fbIcon.innerText = "💡";
+                fbTitle.innerText = "Yuk Pelajari Lagi!";
+            }
+            fbDesc.innerText = item.explanation;
+        }
+
+        function prevQuestion() {
+            if (currentQuizIdx > 0) {
+                playSoundEffect('click');
+                currentQuizIdx--;
+                renderQuizQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            playSoundEffect('click');
+            if (currentQuizIdx < quizData.length - 1) {
+                currentQuizIdx++;
+                renderQuizQuestion();
+            } else {
+                switchTab('modul-rangkuman');
+            }
+        }
+
+        function updateSummary() {
+            let score = 0;
+            userQuizAnswers.forEach((ans, idx) => {
+                if (ans === quizData[idx].answer) score += 20;
+            });
+
+            document.getElementById('summary-quiz-score').innerText = score;
+
+            let isGameCorrect = false;
+            let filledCount = userGameAnswers.filter(a => a !== null).length;
+
+            if (filledCount === 5) {
+                let match = true;
+                userGameAnswers.forEach((num, idx) => {
+                    if (num !== idx + 1) match = false;
+                });
+                isGameCorrect = match;
+            }
+
+            const gameStatusEl = document.getElementById('summary-game-status');
+            if (isGameCorrect) {
+                gameStatusEl.innerText = "✅ 100% Sempurna";
+                gameStatusEl.className = "text-sm font-bold text-emerald-600 block mt-2";
+            } else {
+                gameStatusEl.innerText = "⚠️ Perlu Ditinjau";
+                gameStatusEl.className = "text-sm font-bold text-amber-600 block mt-2";
+            }
+
+            // Star logic
+            const starEl = document.getElementById('summary-stars');
+            const appEl = document.getElementById('summary-appreciation');
+
+            if (score === 100 && isGameCorrect) {
+                starEl.innerHTML = "⭐ ⭐ ⭐";
+                appEl.innerText = "Masya Allah! Selamat ya anak sholeh/sholehah, kamu meraih predikat Bintang Tiga Utama!";
+                playSoundEffect('fanfare');
+                triggerConfetti();
+            } else if (score >= 60) {
+                starEl.innerHTML = "⭐ ⭐ ⚪";
+                appEl.innerText = "Bagus sekali! Tingkatkan terus ingatanmu untuk mencapai 3 bintang sempurna!";
+            } else {
+                starEl.innerHTML = "⭐ ⚪ ⚪";
+                appEl.innerText = "Semangat terus belajar! Cobalah ulangi permainan susun urutan dan kuis lagi ya!";
+            }
+        }
+
+        function resetAllProgress() {
+            playSoundEffect('click');
+            currentQuizIdx = 0;
+            userQuizAnswers = [null, null, null, null, null];
+            resetGame();
+            switchTab('modul-materi');
+        }
+
+        // Canvas Confetti Effect
+        function triggerConfetti() {
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const particles = [];
+            const colors = ['#0D7A5F', '#F59E0B', '#10B981', '#3B82F6', '#EC4899'];
+
+            for (let i = 0; i < 80; i++) {
+                particles.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    vx: (Math.random() - 0.5) * 12,
+                    vy: (Math.random() - 0.7) * 12,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    life: 100
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                let alive = false;
+
+                particles.forEach(p => {
+                    if (p.life > 0) {
+                        alive = true;
+                        p.x += p.vx;
+                        p.y += p.vy;
+                        p.vy += 0.2; // gravity
+                        p.life--;
+                        ctx.fillStyle = p.color;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+
+                if (alive) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+            animate();
+        }
+
+        // Window load initialization
+        window.onload = function() {
+            renderGame();
+            renderQuizQuestion();
+        }
+    </script>
+</body>
+</html>
